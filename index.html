@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fibrazo NOC — v25.0 · Ultimate Professional Sync</title>
+  <title>Fibrazo NOC — v26.0 · Ultimate Professional Sync</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -47,13 +47,14 @@
     .hdr-date{font-weight:700;font-size:14px;color:var(--t1)}
     .hdr-clock{font-family:var(--fm);color:var(--g);font-size:13px;margin-top:2px}
 
-    /* ── KPIs ── */
+    /* ── KPIs (Estilo v10) ── */
     .kgrid{display:grid;grid-template-columns:repeat(6, 1fr);gap:12px;margin-bottom:16px}
-    .kpi{background:var(--card);border-radius:14px;padding:15px;border:1px solid var(--bd);box-shadow:var(--sh);position:relative;transition:all 0.3s ease}
+    .kpi{background:var(--card);border-radius:14px;padding:15px;border:1px solid var(--bd);box-shadow:var(--sh);position:relative;transition:all 0.3s ease; border-top: 3px solid var(--kc, var(--bd))}
     .kpi-v{font-family:var(--fh);font-size:28px;font-weight:800;line-height:1;color:var(--t1)}
     .kpi-label{font-size:9px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;font-weight:700;letter-spacing:0.05em}
+    .kpi-trend{position:absolute; top:12px; right:12px; font-size:10px; font-weight:800}
 
-    /* ── LAYOUT PRINCIPAL (v10 STYLE) ── */
+    /* ── LAYOUT PRINCIPAL (v10 Fiel) ── */
     .main-layout{display:grid;grid-template-columns:1fr 280px;gap:16px}
     .content-left{display:flex;flex-direction:column;gap:16px}
 
@@ -65,7 +66,7 @@
     .tbl th{text-align:left;padding:10px 20px;color:var(--t2);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--bd)}
     .tbl td{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;color:var(--t1);font-size:12px}
 
-    /* ── RASPBERRYS (NetPath Visual) ── */
+    /* ── RASPBERRYS ── */
     .path-row{display:flex;align-items:center;gap:10px}
     .path-node{width:10px;height:10px;border-radius:50%;border:2px solid var(--bd)}
     .path-line{height:2px;flex:1;background:var(--bd)}
@@ -73,12 +74,12 @@
     .node-err{background:var(--danger);border-color:var(--danger);animation:pulse-node 1.5s infinite}
     @keyframes pulse-node{0%{transform:scale(1);opacity:1} 50%{transform:scale(1.2);opacity:0.6} 100%{transform:scale(1);opacity:1}}
 
-    /* ── UPTIME BARS ── */
+    /* ── UPTIME BARS (v10 style) ── */
     .up-bar-wrap{display:flex;align-items:center;gap:10px}
     .uptime-bar{height:5px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;flex:1}
     .uptime-fill{height:100%;border-radius:3px}
 
-    /* ── SIDEBAR (Restore v10) ── */
+    /* ── SIDEBAR (v10 Restore) ── */
     .sidebar-3d{display:flex;flex-direction:column;gap:12px}
     .sidebar-title{font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;margin-bottom:5px;padding-left:5px}
     .day-card{background:var(--card);border-radius:16px;border:1px solid var(--bd);overflow:hidden;box-shadow:var(--sh)}
@@ -88,11 +89,11 @@
     .day-stat{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px;color:var(--t2)}
     .day-stat b{color:var(--t1);font-family:var(--fm)}
     .day-divider{height:1px; background:var(--bd); margin:8px 0; opacity: 0.3}
-    .day-total-val{font-family:var(--fh);font-size:22px;font-weight:800;color:var(--g)}
+    .day-total-val{font-family:var(--fh);font-size:20px;font-weight:800;color:var(--g)}
     .day-bar{height:3px; background:var(--bd); border-radius:10px; margin-top:8px; overflow:hidden}
     .day-bar-fill{height:100%; background:var(--g); transition: width 1s ease}
 
-    /* ── STATUS EFFECTS ── */
+    /* ── BADGES & STATUS ── */
     .bdg{font-size:9px;padding:3px 8px;border-radius:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em}
     .b-red{background:rgba(248,81,73,0.15);color:var(--danger);border:1px solid rgba(248,81,73,0.3)}
     .b-green{background:rgba(63,185,80,0.15);color:var(--g);border:1px solid rgba(63,185,80,0.3)}
@@ -102,22 +103,22 @@
     @keyframes blink{0%,100%{opacity:1} 50%{opacity:0.6}}
     .iti{font-family:var(--fm);background:var(--bd);padding:2px 5px;border-radius:4px;color:var(--t1);font-size:10px;font-weight:600}
 
-    /* ── ANALYTICS (Reporte Corporativo) ── */
+    /* ── FORMS (v19.5 Handover) ── */
+    .form-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .select-custom, .input-custom{width:100%;background:var(--sf);border:1px solid var(--bd);color:var(--t1);padding:10px 14px;border-radius:10px;font-family:var(--fb);font-size:12px;outline:none;margin-bottom:12px}
+    .no-print-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer;font-family:var(--fb);transition:0.2s;font-size:11px}
+
+    /* ── ANALYTICS (v20.1 Style) ── */
     .akgrid{display:grid;grid-template-columns:repeat(4, 1fr);gap:12px;margin-bottom:20px}
     .akpi{background:rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius:14px; padding:20px; text-align:center}
     .akpi-val{font-family:var(--fh); font-size:26px; color:var(--g); display:block; line-height:1}
     .akpi-lab{font-size:10px; color:var(--t2); text-transform:uppercase; font-weight:700; margin-top:5px; display:block}
     .chart-box{background:var(--card); border-radius:16px; border:1px solid var(--bd); padding:24px; box-shadow:var(--sh)}
 
-    /* ── FORMS (v19.5/v20.1) ── */
-    .form-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-    .select-custom, .input-custom{width:100%;background:var(--sf);border:1px solid var(--bd);color:var(--t1);padding:10px 14px;border-radius:10px;font-family:var(--fb);font-size:12px;outline:none;margin-bottom:12px}
-    .no-print-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer;font-family:var(--fb);transition:0.2s;font-size:11px}
-
     @media print {
       .tab-nav, .no-print-btn, .hdr-clock, .sys-health { display: none !important; }
       body { background: white !important; color: black !important; }
-      .card, .kpi, .hdr, .day-card { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
+      .card, .kpi, .hdr { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
     }
   </style>
 </head>
@@ -126,18 +127,18 @@
 
   <!-- NAVEGACIÓN -->
   <div class="tab-nav">
-    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Dashboard Intelligence</button>
+    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Panel Ops</button>
     <button class="tab-btn" data-tab="turno"><span class="tab-dot"></span>Entrega de Turno</button>
-    <button class="tab-btn" data-tab="analitica"><span class="tab-dot"></span>Analítica Gerencial</button>
+    <button class="tab-btn" data-tab="analitica"><span class="tab-dot"></span>Analítica Real</button>
     <button class="tab-btn" data-tab="historial"><span class="tab-dot"></span>Log Histórico Real</button>
   </div>
 
-  <!-- PANEL: DASHBOARD (v10 FULL REPRODUCTION) -->
+  <!-- PANEL: DASHBOARD -->
   <div id="panel-dashboard" class="tab-panel active">
     <div class="hdr">
       <div class="brand-box">
         <div class="brand">FIBRA<em>ZO</em> — NOC INTELLIGENCE <div class="brand-deco"></div></div>
-        <div class="hdr-path" id="sync-msg" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">mduque@fibrazo.com · DATA REAL DRIVE · AUTO-SYNC ✨</div>
+        <div class="hdr-path" id="sync-msg" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">DATA REAL GMAIL · SYNC: 100% ✨</div>
       </div>
       
       <div class="sys-health">
@@ -154,19 +155,19 @@
       </div>
     </div>
 
-    <!-- KPIs (v10 Image) -->
+    <!-- KPIs (v10 Image Style) -->
     <div class="kgrid">
-      <div class="kpi" style="--kc:#e3b341"><div class="kpi-label">Tickets Abiertos</div><div class="kpi-v" id="k-odoo">9</div></div>
-      <div class="kpi" style="--kc:var(--danger)"><div class="kpi-label">Canales TV Caídos</div><div class="kpi-v" id="k-tv" style="color:var(--danger)">4</div></div>
+      <div class="kpi" style="--kc:#e3b341"><div class="kpi-label">Tickets Abiertos</div><div class="kpi-v" id="k-odoo">9</div><div class="kpi-trend" style="color:var(--warning)">+4 hoy</div></div>
+      <div class="kpi" style="--kc:var(--danger)"><div class="kpi-label">Canales TV Caídos</div><div class="kpi-v" id="k-tv" style="color:var(--danger)">4</div><div class="kpi-trend" style="color:var(--g)">↓ de 6</div></div>
       <div class="kpi" style="--kc:var(--purple)"><div class="kpi-label">Raspberry Alertas</div><div class="kpi-v" style="color:var(--purple)">3</div></div>
       <div class="kpi" style="--kc:#8b949e"><div class="kpi-label">BitNinja (72h)</div><div class="kpi-v">12</div></div>
       <div class="kpi" style="--kc:var(--accent)"><div class="kpi-label">Liberty Alerts</div><div class="kpi-v">2</div></div>
-      <div class="kpi" style="--kc:#238636"><div class="kpi-label">SLA Vencidos</div><div class="kpi-v">3</div></div>
+      <div class="kpi" style="--kc:#238636"><div class="kpi-label">SLA Vencidos</div><div class="kpi-v">3</div><div class="kpi-trend" style="color:var(--danger)">Crítico</div></div>
     </div>
 
     <div class="main-layout">
       <div class="content-left">
-        <!-- RASPBERRYS MONITORING -->
+        <!-- RASPBERRYS visual -->
         <div class="card">
           <div class="ch"><span>🛡️ Fibrazo Raspberry Monitoring — <i>Rutas de Red</i></span><span class="bdg b-purple">3 Degradaciones</span></div>
           <table class="tbl">
@@ -188,29 +189,29 @@
           </table>
         </div>
 
-        <!-- TV MONITOR (v10 Detail) -->
+        <!-- TV MONITOR (v10 bars) -->
         <div class="card">
           <div class="ch"><span>📺 Monitor TV — Canales con Falla</span><span class="bdg b-red">FALLA ACTIVA</span></div>
           <table class="tbl">
-            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime 7d</th><th>Desde</th></tr></thead>
+            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime 7d</th><th>Incidentes</th><th>Desde</th></tr></thead>
             <tbody>
-              <tr><td style="font-weight:700">AZ Clic - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td>28/03</td></tr>
-              <tr><td style="font-weight:700">AZ Corazón - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td>28/03</td></tr>
-              <tr style="background:rgba(63,185,80,0.05)"><td style="color:var(--g); font-weight:700">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td><div class="up-bar-wrap"><span>98.1%</span><div class="uptime-bar"><div class="uptime-fill" style="width:98%; background:var(--g)"></div></div></div></td><td>Hoy</td></tr>
+              <tr><td style="font-weight:700">AZ Clic - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td style="color:var(--t3)">52 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr><td style="font-weight:700">AZ Corazón - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td style="color:var(--t3)">53 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr style="background:rgba(63,185,80,0.05)"><td style="color:var(--g); font-weight:700">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td><div class="up-bar-wrap"><span>98.1%</span><div class="uptime-bar"><div class="uptime-fill" style="width:98%; background:var(--g)"></div></div></div></td><td style="color:var(--t3)">1 caída</td><td style="font-family:var(--fm)">Hoy</td></tr>
             </tbody>
           </table>
         </div>
 
-        <!-- ODOO + SEGURIDAD (v10 Grid) -->
+        <!-- ODOO + SEGURIDAD (v10 Image Grid) -->
         <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:16px">
           <div class="card">
             <div class="ch"><span>📋 Bandeja ODOO Prioritaria</span><span class="bdg b-orange">9 ABIERTOS</span></div>
             <table class="tbl">
               <thead><tr><th>ID</th><th>Sitio</th><th>SLA</th></tr></thead>
               <tbody>
-                <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Mandela</td><td style="color:var(--danger)">21h 37m</td></tr>
-                <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td style="color:var(--danger)">43h 27m</td></tr>
-                <tr><td><span class="iti">290569</span></td><td>Error contenido juegos/apps</td><td style="color:var(--danger)">124h 45m</td></tr>
+                <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Mandela</td><td style="color:var(--danger); font-weight:700">21h 37m</td></tr>
+                <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td style="color:var(--danger); font-weight:700">43h 27m</td></tr>
+                <tr><td><span class="iti">290569</span></td><td>Error contenido juegos/apps</td><td style="color:var(--danger); font-weight:700">124h 45m</td></tr>
               </tbody>
             </table>
           </div>
@@ -234,7 +235,6 @@
           <div class="day-card-body">
             <div class="day-stat">Masivos <b style="color:var(--danger)">6</b></div>
             <div class="day-stat">Autodiag <b style="color:var(--warning)">9</b></div>
-            <div class="day-stat">Clientes <b style="color:var(--accent)">3</b></div>
             <div class="day-divider"></div>
             <div class="day-total" style="display:flex; justify-content:space-between; align-items:center"><span>Total</span><span class="day-total-val" id="total-hoy">--</span></div>
             <div class="day-bar"><div class="day-bar-fill" style="width:78%"></div></div>
@@ -246,24 +246,24 @@
           <div class="day-card-body">
             <div class="day-stat">Masivos <b>2</b></div>
             <div class="day-stat">Autodiag <b>10</b></div>
-            <div class="day-stat">Clientes <b>2</b></div>
             <div class="day-divider"></div>
             <div style="display:flex; justify-content:space-between"><span>Total</span><span class="day-total-val" style="font-size:16px">14</span></div>
           </div>
         </div>
 
         <div class="day-card" style="background:var(--bk); text-align:center; padding:15px; border-color:var(--bd)">
-          <div style="font-size:10px; opacity:0.5; text-transform:uppercase">Acumulado Histórico</div>
+          <div style="font-size:10px; opacity:0.5; text-transform:uppercase">3 DÍAS REVISADOS</div>
           <div style="font-family:var(--fh); font-size:32px; font-weight:800; color:var(--g)" id="total-db">0</div>
+          <div style="font-size:9px; opacity:0.3">Gmail / OdooBot Sync</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PANEL: TURNO (v19.5 Handover) -->
+  <!-- PANEL: TURNO (Full v19.5/A-H) -->
   <div id="panel-turno" class="tab-panel">
     <div class="hdr">
-      <div class="brand-box"><div class="brand">ENTREGA DE TURNO <em>v25.0</em></div></div>
+      <div class="brand-box"><div class="brand">ENTREGA DE TURNO <em>v26.0</em></div></div>
       <div class="hdr-right no-print" style="display:flex; gap:10px">
         <button class="no-print-btn" style="background:var(--accent); color:white" onclick="window.open('https://wiki.fibrazo.com.co/s/general/p/entrega-de-turno-yq4MODacP7', '_blank')">🌐 Wiki Soporte</button>
         <button class="no-print-btn" style="background:#25D366; color:white" onclick="copyHandover()">💬 WhatsApp</button>
@@ -298,14 +298,14 @@
     </div>
   </div>
 
-  <!-- PANEL: ANALITICA (v20.1 Report Mejorado) -->
+  <!-- PANEL: ANALITICA (v20.1 Management Report) -->
   <div id="panel-analitica" class="tab-panel">
     <div class="hdr">
       <div class="brand-box"><div class="brand">REPORTE GERENCIAL <em>NOC Intelligence</em></div></div>
     </div>
     <div class="akgrid">
       <div class="akpi"><span class="akpi-val" id="ana-items">--</span><span class="akpi-lab">REGISTROS TOTALES</span></div>
-      <div class="akpi"><span class="akpi-val">98.2%</span><span class="akpi-lab">DISPONIBILIDAD CORE</span></div>
+      <div class="akpi"><span class="akpi-val">98.2%</span><span class="akpi-lab">UPTIME CORE</span></div>
       <div class="akpi"><span class="akpi-val" style="color:var(--danger)">6.4h</span><span class="akpi-lab">MTTR PROMEDIO</span></div>
       <div class="akpi"><span class="akpi-val" id="ana-tix">--</span><span class="akpi-lab">TIX PENDIENTES</span></div>
     </div>
@@ -315,7 +315,7 @@
         <canvas id="hoursChart" height="250"></canvas>
       </div>
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📈 Carga de Trabajo por Turno</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📈 Productividad por Franja Horaria</div>
         <canvas id="shiftChart" height="250"></canvas>
       </div>
     </div>
@@ -325,7 +325,7 @@
         <canvas id="tvTrendChart" height="200"></canvas>
       </div>
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">🎯 Cumplimiento de Objetivos SLA</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">🎯 Cumplimiento Objetivos SLA</div>
         <div style="padding-top:20px">
           <div style="margin-bottom:15px">
             <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px"><span>Atención Masivos</span><span>92%</span></div>
@@ -353,7 +353,7 @@
       <div style="overflow-x:auto">
         <table class="tbl" id="log-table">
           <thead><tr><th>Fecha</th><th>Ingeniero</th><th>Turno</th><th>Issues</th><th>Odoo</th><th>Observaciones</th></tr></thead>
-          <tbody id="log-body"><tr><td colspan="6" style="text-align:center; padding:40px">Sincronizando con Google Drive...</td></tr></tbody>
+          <tbody id="log-body"><tr><td colspan="6" style="text-align:center; padding:40px">Conectando a base de datos...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -474,7 +474,7 @@ async function saveToDrive() {
       body: JSON.stringify(payload) 
     });
     
-    alert("✓ Registro enviado. Sincronizando base de datos...");
+    alert("✓ Registro enviado. Sincronizando datos...");
     setTimeout(() => { syncData(); }, 2000);
   } catch(e) { alert("Error de conexión con el script de Google."); }
 }
@@ -483,7 +483,7 @@ function copyHandover() {
   const text = `*FIBRAZO NOC — RELEVO*\n👤 Ing: ${document.getElementById('col-a').value}\n🕐 Turno: ${document.getElementById('col-b').value}\n📊 Odoo: ${document.getElementById('col-g').value} | TV Down: ${document.getElementById('col-f').value}\n📝 Obs: ${document.getElementById('col-h').value || 'Sin novedades'}`;
   const el = document.createElement('textarea');
   el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-  alert("Resumen copiado para WhatsApp.");
+  alert("Resumen copiado.");
 }
 
 function filterLog() {
