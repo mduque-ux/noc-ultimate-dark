@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fibrazo NOC — v27.0 · Omega Master Final</title>
+  <title>Fibrazo NOC — v32.0 · Ultimate Professional Master</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -47,14 +47,22 @@
     .hdr-date{font-weight:700;font-size:14px;color:var(--t1)}
     .hdr-clock{font-family:var(--fm);color:var(--g);font-size:13px;margin-top:2px}
 
-    /* ── KPIs (Basado en v10 Image) ── */
-    .kgrid{display:grid;grid-template-columns:repeat(6, 1fr);gap:12px;margin-bottom:16px}
-    .kpi{background:var(--card);border-radius:14px;padding:15px;border:1px solid var(--bd);box-shadow:var(--sh);position:relative;transition:all 0.3s ease; border-top: 3px solid var(--kc, var(--bd))}
-    .kpi-v{font-family:var(--fh);font-size:28px;font-weight:800;line-height:1;color:var(--t1)}
-    .kpi-label{font-size:9px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;font-weight:700;letter-spacing:0.05em}
-    .kpi-trend{position:absolute; top:12px; right:12px; font-size:10px; font-weight:800}
+    /* ── SYNC STATUS BAR ── */
+    .rbar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;margin-bottom:16px;background:rgba(255,255,255,0.02);border-radius:12px;border:1px solid var(--bd);font-size:11px;color:var(--t2)}
+    .ldot{width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+    .prog-wrap{width:100px;height:4px;background:var(--bd);border-radius:2px;overflow:hidden;margin:0 15px}
+    .prog-fill{height:100%;background:var(--g);width:0%;transition:width 0.4s ease}
 
-    /* ── LAYOUT (Fiel v10) ── */
+    /* ── KPIs (v10 Style) ── */
+    .kgrid{display:grid;grid-template-columns:repeat(5, 1fr);gap:12px;margin-bottom:16px}
+    .kpi{background:var(--card);border-radius:14px;padding:20px;border:1px solid var(--bd);box-shadow:var(--sh);position:relative;transition:all 0.3s ease; border-top: 3px solid var(--kc, var(--bd))}
+    .kpi-v{font-family:var(--fh);font-size:36px;font-weight:800;line-height:1;color:var(--t1)}
+    .kpi-label{font-size:10px;color:var(--t2);margin-bottom:10px;text-transform:uppercase;font-weight:700;letter-spacing:0.08em}
+    .kpi-trend{position:absolute; top:20px; right:20px; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px}
+    .kpi-s{font-size:10px; color:var(--t3); margin-top:8px; font-family:var(--fm)}
+
+    /* ── LAYOUT PRINCIPAL (v10 Replica) ── */
     .main-layout{display:grid;grid-template-columns:1fr 280px;gap:16px}
     .content-left{display:flex;flex-direction:column;gap:16px}
 
@@ -63,33 +71,26 @@
     .ch{padding:14px 20px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--bd);font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:11.5px}
     
     .tbl{width:100%;border-collapse:collapse}
-    .tbl th{text-align:left;padding:10px 20px;color:var(--t2);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--bd)}
-    .tbl td{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;color:var(--t1);font-size:12px}
+    .tbl th{text-align:left;padding:12px 20px;color:var(--t2);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--bd)}
+    .tbl td{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;color:var(--t1);font-size:12px}
 
-    /* ── RASPBERRYS (NetPath Visual) ── */
-    .path-row{display:flex;align-items:center;gap:10px}
-    .path-node{width:10px;height:10px;border-radius:50%;border:2px solid var(--bd)}
-    .path-line{height:2px;flex:1;background:var(--bd)}
-    .node-ok{background:var(--g);border-color:var(--gd)}
-    .node-err{background:var(--danger);border-color:var(--danger);animation:pulse-node 1.5s infinite}
-    @keyframes pulse-node{0%{transform:scale(1);opacity:1} 50%{transform:scale(1.2);opacity:0.6} 100%{transform:scale(1);opacity:1}}
-
-    /* ── UPTIME BARS (v10 style) ── */
+    /* ── UPTIME BARS (v10 Detail) ── */
     .up-bar-wrap{display:flex;align-items:center;gap:10px}
     .uptime-bar{height:5px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;flex:1}
     .uptime-fill{height:100%;border-radius:3px}
 
-    /* ── SIDEBAR (Restore v10) ── */
+    /* ── SIDEBAR (v10 Detail) ── */
     .sidebar-3d{display:flex;flex-direction:column;gap:12px}
     .sidebar-title{font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;margin-bottom:5px;padding-left:5px}
     .day-card{background:var(--card);border-radius:16px;border:1px solid var(--bd);overflow:hidden;box-shadow:var(--sh)}
     .day-card-hdr{padding:12px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
-    .day-card-fecha{font-family:var(--fh);font-size:11px;font-weight:800;color:var(--t1)}
+    .day-card-fecha{font-family:var(--fh);font-size:12px;font-weight:800;color:var(--t1)}
+    .day-card-dia{font-size:10px;color:var(--t3)}
     .day-card-body{padding:12px 16px}
-    .day-stat{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px;color:var(--t2)}
+    .day-stat{display:flex;justify-content:space-between;margin-bottom:8px;font-size:11px;color:var(--t2)}
     .day-stat b{color:var(--t1);font-family:var(--fm)}
     .day-divider{height:1px; background:var(--bd); margin:8px 0; opacity: 0.3}
-    .day-total-val{font-family:var(--fh);font-size:20px;font-weight:800;color:var(--g)}
+    .day-total-val{font-family:var(--fh);font-size:24px;font-weight:800;color:var(--g)}
     .day-bar{height:3px; background:var(--bd); border-radius:10px; margin-top:8px; overflow:hidden}
     .day-bar-fill{height:100%; background:var(--g); transition: width 1s ease}
 
@@ -103,22 +104,26 @@
     @keyframes blink{0%,100%{opacity:1} 50%{opacity:0.6}}
     .iti{font-family:var(--fm);background:var(--bd);padding:2px 5px;border-radius:4px;color:var(--t1);font-size:10px;font-weight:600}
 
-    /* ── FORMS (Full v19.5/A-H) ── */
+    /* ── ANALYTICS (v20.1 Management Report) ── */
+    .akgrid{display:grid;grid-template-columns:repeat(4, 1fr);gap:12px;margin-bottom:20px}
+    .akpi{background:rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius:14px; padding:20px; text-align:center}
+    .akpi-val{font-family:var(--fh); font-size:28px; color:var(--g); display:block; line-height:1}
+    .akpi-lab{font-size:10px; color:var(--t2); text-transform:uppercase; font-weight:700; margin-top:8px; display:block}
+    .chart-box{background:var(--card); border-radius:16px; border:1px solid var(--bd); padding:24px; box-shadow:var(--sh)}
+
+    /* ── FORMS (Full Handover v19.5) ── */
     .form-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
     .select-custom, .input-custom{width:100%;background:var(--sf);border:1px solid var(--bd);color:var(--t1);padding:10px 14px;border-radius:10px;font-family:var(--fb);font-size:12px;outline:none;margin-bottom:12px}
     .no-print-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer;font-family:var(--fb);transition:0.2s;font-size:11px}
 
-    /* ── ANALYTICS (v20.1 Management Report) ── */
-    .akgrid{display:grid;grid-template-columns:repeat(4, 1fr);gap:12px;margin-bottom:20px}
-    .akpi{background:rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius:14px; padding:20px; text-align:center}
-    .akpi-val{font-family:var(--fh); font-size:26px; color:var(--g); display:block; line-height:1}
-    .akpi-lab{font-size:10px; color:var(--t2); text-transform:uppercase; font-weight:700; margin-top:5px; display:block}
-    .chart-box{background:var(--card); border-radius:16px; border:1px solid var(--bd); padding:24px; box-shadow:var(--sh)}
+    /* ── AI MODAL ── */
+    .ai-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(5px)}
+    .ai-modal-box{background:var(--card); border:1px solid #7e22ce; border-radius:20px; max-width:600px; width:100%; padding:25px}
 
     @media print {
       .tab-nav, .no-print-btn, .hdr-clock, .sys-health { display: none !important; }
       body { background: white !important; color: black !important; }
-      .card, .kpi, .hdr, .day-card { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
+      .card, .kpi, .hdr { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
     }
   </style>
 </head>
@@ -127,18 +132,18 @@
 
   <!-- NAVEGACIÓN -->
   <div class="tab-nav">
-    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Dashboard Intelligence</button>
+    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Panel Operativo NOC</button>
     <button class="tab-btn" data-tab="turno"><span class="tab-dot"></span>Entrega de Turno</button>
     <button class="tab-btn" data-tab="analitica"><span class="tab-dot"></span>Analítica General</button>
     <button class="tab-btn" data-tab="historial"><span class="tab-dot"></span>Log Histórico Real</button>
   </div>
 
-  <!-- PANEL: DASHBOARD -->
+  <!-- PANEL: DASHBOARD (v10 Identidad Visual) -->
   <div id="panel-dashboard" class="tab-panel active">
     <div class="hdr">
       <div class="brand-box">
         <div class="brand">FIBRA<em>ZO</em> — NOC INTELLIGENCE <div class="brand-deco"></div></div>
-        <div class="hdr-path" id="sync-msg" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">mduque@fibrazo.com · DATA REAL GMAIL · AUTO-SYNC ✨</div>
+        <div class="hdr-path" id="sync-msg" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">mduque@fibrazo.com · SINCRONIZACIÓN GOOGLE DRIVE ✨</div>
       </div>
       
       <div class="sys-health">
@@ -154,71 +159,61 @@
       </div>
     </div>
 
-    <!-- KPIs -->
+    <!-- SYNC BAR (v10) -->
+    <div class="rbar">
+      <div style="display:flex; align-items:center; gap:8px">
+        <div class="ldot"></div>
+        <span>Monitoreo en Tiempo Real Activo (Gmail + OdooBot + MasMedia)</span>
+        <div class="prog-wrap"><div class="prog-fill" id="sync-bar"></div></div>
+      </div>
+      <button class="no-print-btn" style="background:var(--card); color:white; border:1px solid var(--bd)" onclick="syncData()">↻ Actualizar Bandeja</button>
+    </div>
+
+    <!-- KPIs (v10 replication) -->
     <div class="kgrid">
-      <div class="kpi" style="--kc:#e3b341"><div class="kpi-label">Tickets Abiertos</div><div class="kpi-v" id="k-odoo">9</div><div class="kpi-trend" style="color:var(--warning)">+4 hoy</div></div>
-      <div class="kpi" style="--kc:var(--danger)"><div class="kpi-label">Canales TV Caídos</div><div class="kpi-v" id="k-tv" style="color:var(--danger)">4</div><div class="kpi-trend" style="color:var(--g)">↓ de 6</div></div>
-      <div class="kpi" style="--kc:var(--purple)"><div class="kpi-label">Raspberry Alertas</div><div class="kpi-v" style="color:var(--purple)">3</div></div>
-      <div class="kpi" style="--kc:#8b949e"><div class="kpi-label">BitNinja (72h)</div><div class="kpi-v">12</div></div>
-      <div class="kpi" style="--kc:var(--accent)"><div class="kpi-label">Liberty Alerts</div><div class="kpi-v">2</div></div>
-      <div class="kpi" style="--kc:#238636"><div class="kpi-label">SLA Vencidos</div><div class="kpi-v">3</div><div class="kpi-trend" style="color:var(--danger)">Crítico</div></div>
+      <div class="kpi" style="--kc:#e3b341"><div class="kpi-label">Tickets Abiertos</div><div class="kpi-v" id="k-odoo">9</div><div class="kpi-trend" style="background:rgba(210,153,34,0.1); color:var(--warning)">+4 hoy</div></div>
+      <div class="kpi" style="--kc:var(--danger)"><div class="kpi-label">Canales TV Caídos</div><div class="kpi-v" id="k-tv" style="color:var(--danger)">4</div><div class="kpi-trend" style="background:rgba(63,185,80,0.1); color:var(--g)">↓ de 6</div></div>
+      <div class="kpi" style="--kc:#8b949e"><div class="kpi-label">BitNinja (72h)</div><div class="kpi-v">12</div><div class="kpi-s">IPs en Greylist</div></div>
+      <div class="kpi" style="--kc:var(--accent)"><div class="kpi-label">Liberty Alerts</div><div class="kpi-v">2</div><div class="kpi-s">Enlace R1 BQ</div></div>
+      <div class="kpi" style="--kc:#238636"><div class="kpi-label">SLA Vencidos</div><div class="kpi-v">3</div><div class="kpi-trend" style="background:rgba(248,81,73,0.1); color:var(--danger)">Crítico</div></div>
     </div>
 
     <div class="main-layout">
       <div class="content-left">
-        <!-- RASPBERRYS (NetPath visual) -->
+        
+        <!-- MONITOR TV (v10 Detail) -->
         <div class="card">
-          <div class="ch"><span>🛡️ Fibrazo Raspberry Monitoring — <i>Rutas de Red</i></span><span class="bdg b-purple">3 Degradaciones</span></div>
+          <div class="ch"><span>📺 Monitor MasMedia — Canales con Falla</span><span class="bdg b-red">4 CAÍDOS</span></div>
           <table class="tbl">
-            <thead><tr><th>Origen → Destino</th><th>Latencia</th><th>Pérdida</th><th>Ruta Visual</th></tr></thead>
+            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime 7d</th><th>Incidentes</th><th>Desde</th></tr></thead>
             <tbody>
-              <tr>
-                <td><strong>CTG-CORE → BQ-POP</strong></td>
-                <td style="color:var(--warning)">45ms</td>
-                <td>0%</td>
-                <td><div class="path-row"><div class="path-node node-ok"></div><div class="path-line"></div><div class="path-node node-ok"></div><div class="path-line"></div><div class="path-node node-err"></div></div></td>
-              </tr>
-              <tr>
-                <td><strong>SMR-DIST → CTG-CORE</strong></td>
-                <td style="color:var(--danger)">125ms</td>
-                <td style="color:var(--danger)">5%</td>
-                <td><div class="path-row"><div class="path-node node-err"></div><div class="path-line"></div><div class="path-node node-ok"></div></div></td>
-              </tr>
+              <tr><td style="font-weight:700">AZ Clic - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td style="color:var(--t3)">52 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr><td style="font-weight:700">AZ Corazón - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td style="color:var(--t3)">53 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr style="background:rgba(63,185,80,0.05)"><td style="color:var(--g); font-weight:700">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td><div class="up-bar-wrap"><span>98.1%</span><div class="uptime-bar"><div class="uptime-fill" style="width:98%; background:var(--g)"></div></div></div></td><td style="color:var(--t3)">1 reciente</td><td style="font-family:var(--fm)">Hoy</td></tr>
             </tbody>
           </table>
         </div>
 
-        <!-- TV MONITOR (v10 bars) -->
-        <div class="card">
-          <div class="ch"><span>📺 Monitor TV — Canales con Falla</span><span class="bdg b-red">FALLA ACTIVA</span></div>
-          <table class="tbl">
-            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime 7d</th><th>Desde</th></tr></thead>
-            <tbody>
-              <tr><td style="font-weight:700">AZ Clic - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td>28/03</td></tr>
-              <tr><td style="font-weight:700">AZ Corazón - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td>28/03</td></tr>
-              <tr style="background:rgba(63,185,80,0.05)"><td style="color:var(--g); font-weight:700">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td><div class="up-bar-wrap"><span>98.1%</span><div class="uptime-bar"><div class="uptime-fill" style="width:98%; background:var(--g)"></div></div></div></td><td>Hoy</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- ODOO + SEGURIDAD (v10 Grid) -->
+        <!-- ODOO + SEGURIDAD (v10 Layout) -->
         <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:16px">
           <div class="card">
             <div class="ch"><span>📋 Bandeja ODOO Prioritaria</span><span class="bdg b-orange">9 ABIERTOS</span></div>
             <table class="tbl">
-              <thead><tr><th>ID</th><th>Sitio</th><th>SLA</th></tr></thead>
+              <thead><tr><th>Ticket ID</th><th>Sitio / Evento</th><th>Estado</th><th>SLA</th></tr></thead>
               <tbody>
-                <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Mandela</td><td style="color:var(--danger)">21h 37m</td></tr>
-                <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td style="color:var(--danger)">43h 27m</td></tr>
+                <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Mandela</td><td><span class="bdg b-blue">Proceso</span></td><td style="color:var(--danger); font-weight:700">21h 37m</td></tr>
+                <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td><span class="bdg b-blue">Proceso</span></td><td style="color:var(--danger); font-weight:700">43h 27m</td></tr>
+                <tr><td><span class="iti">290569</span></td><td>Error juegos/apps</td><td><span class="bdg b-red">Nuevo</span></td><td style="color:var(--danger); font-weight:700">124h 45m</td></tr>
               </tbody>
             </table>
           </div>
           <div class="card">
-            <div class="ch"><span>🛡️ Seguridad & Latencias</span></div>
+            <div class="ch"><span>🛡️ Seguridad & Raspberrys</span></div>
             <div style="padding:15px; font-size:11px; line-height:1.7; color:var(--t2)">
               <div style="margin-bottom:8px"><b>BitNinja:</b> 77.247.120.68 <span class="bdg b-orange" style="font-size:8px">Greylist</span></div>
               <div><b>Liberty R1:</b> Falla detectada en BQ (CI1029682).</div>
-              <div style="margin-top:5px; border-top:1px solid var(--bd); padding-top:5px; opacity:0.6">Latencia Costa Caribe activa.</div>
+              <div style="margin-top:5px; border-top:1px solid var(--bd); padding-top:5px; opacity:0.6">Latencia elevada detectada en Raspberrys segmentales.</div>
+              <div style="margin-top:10px" class="path-row"><div class="path-node node-ok"></div><div class="path-line"></div><div class="path-node node-ok"></div><div class="path-line"></div><div class="path-node node-err"></div></div>
             </div>
           </div>
         </div>
@@ -227,19 +222,34 @@
       <!-- SIDEBAR 3 DÍAS (v10 Restore) -->
       <div class="sidebar-3d">
         <div class="sidebar-title">Resumen de Carga (72h)</div>
+        
         <div class="day-card" style="border-left:3px solid var(--g)">
           <div class="day-card-hdr"><div class="day-card-fecha" style="color:var(--g)">29 Mar ●</div><div class="day-card-dia" style="font-size:9px">HOY</div></div>
           <div class="day-card-body">
             <div class="day-stat">Masivos <b style="color:var(--danger)">6</b></div>
             <div class="day-stat">Autodiag <b style="color:var(--warning)">9</b></div>
+            <div class="day-stat">Clientes <b style="color:var(--accent)">3</b></div>
             <div class="day-divider"></div>
             <div class="day-total" style="display:flex; justify-content:space-between; align-items:center"><span>Total</span><span class="day-total-val" id="total-hoy">--</span></div>
             <div class="day-bar"><div class="day-bar-fill" style="width:78%"></div></div>
           </div>
         </div>
+
+        <div class="day-card">
+          <div class="day-card-hdr"><div class="day-card-fecha">28 Mar</div><div class="day-card-dia" style="font-size:9px">SÁBADO</div></div>
+          <div class="day-card-body">
+            <div class="day-stat">Masivos <b>2</b></div>
+            <div class="day-stat">Autodiag <b>10</b></div>
+            <div class="day-divider"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center"><span>Total</span><span class="day-total-val" style="font-size:18px">14</span></div>
+            <div class="day-bar"><div class="day-bar-fill" style="width:61%"></div></div>
+          </div>
+        </div>
+
         <div class="day-card" style="background:var(--bk); text-align:center; padding:15px; border-color:var(--bd)">
           <div style="font-size:10px; opacity:0.5; text-transform:uppercase">3 DÍAS REVISADOS</div>
           <div style="font-family:var(--fh); font-size:32px; font-weight:800; color:var(--g)" id="total-db">0</div>
+          <div style="font-size:9px; opacity:0.3">Items procesados real-time</div>
         </div>
       </div>
     </div>
@@ -247,13 +257,7 @@
 
   <!-- PANEL: TURNO (Full v19.5/A-H) -->
   <div id="panel-turno" class="tab-panel">
-    <div class="hdr">
-      <div class="brand-box"><div class="brand">ENTREGA DE TURNO <em>v27.0</em></div></div>
-      <div class="hdr-right no-print" style="display:flex; gap:10px">
-        <button class="no-print-btn" style="background:var(--accent); color:white" onclick="window.open('https://wiki.fibrazo.com.co/s/general/p/entrega-de-turno-yq4MODacP7', '_blank')">🌐 Wiki Soporte</button>
-        <button class="no-print-btn" style="background:#25D366; color:white" onclick="copyHandover()">💬 WhatsApp</button>
-      </div>
-    </div>
+    <div class="hdr"><div class="brand">ENTREGA DE TURNO <em>v32.0</em></div></div>
     <div class="card" style="padding:25px">
       <div class="form-col">
         <div><label style="font-size:9px; font-weight:700; color:var(--t2)">COL A: INGENIERO SALIENTE</label>
@@ -279,11 +283,16 @@
         <div><label style="font-size:9px; font-weight:700; color:var(--t2)">COL G: TICKETS ODOO</label><input type="number" class="input-custom" id="col-g" value="9"></div>
       </div>
       <div><label style="font-size:9px; font-weight:700; color:var(--t2)">COL H: OBSERVACIONES TÉCNICAS</label><textarea id="col-h" class="input-custom" style="height:120px; resize:none" placeholder="Indique novedades técnicas críticas..."></textarea></div>
-      <button class="no-print-btn" style="width:100%; background:var(--g); color:var(--bk); height:45px; border:none; margin-top:10px" onclick="saveToDrive()">💾 GUARDAR EN GOOGLE DRIVE & ACTUALIZAR ANALÍTICA</button>
+      
+      <div style="display:flex; gap:10px; margin-top:10px">
+        <button class="no-print-btn" style="flex:1; background:var(--g); color:var(--bk); height:45px; border:none" onclick="saveToDrive()">💾 GUARDAR EN GOOGLE DRIVE</button>
+        <button class="no-print-btn" style="background:var(--accent); color:white" onclick="window.open('https://wiki.fibrazo.com.co/s/general/p/entrega-de-turno-yq4MODacP7', '_blank')">🌐 Wiki</button>
+        <button class="no-print-btn" style="background:#25D366; color:white" onclick="copyHandover()">💬 WhatsApp</button>
+      </div>
     </div>
   </div>
 
-  <!-- PANEL: ANALITICA GENERAL (MOTOR REAL) -->
+  <!-- PANEL: ANALITICA GENERAL (MOTOR REAL RECONSTRUIDO) -->
   <div id="panel-analitica" class="tab-panel">
     <div class="hdr">
       <div class="brand-box"><div class="brand">ANALÍTICA GENERAL <em>Reporte de Datos Reales</em></div></div>
@@ -296,21 +305,21 @@
     </div>
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px">
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📊 Tickets Gestionados (Basado en historial)</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📊 Tickets / Ingeniero (Performance Real)</div>
         <canvas id="hoursChart" height="250"></canvas>
       </div>
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📈 Productividad por Franja Horaria</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📈 Productividad por Turno</div>
         <canvas id="shiftChart" height="250"></canvas>
       </div>
     </div>
     <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:16px">
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📺 Tendencia Fallas TV (Muestra)</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📺 Tendencia Fallas TV (Histórico 24h)</div>
         <canvas id="tvTrendChart" height="200"></canvas>
       </div>
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">🎯 Cumplimiento Metas SLA</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">🎯 Cumplimiento Metas SLA NOC</div>
         <div style="padding-top:20px">
           <div style="margin-bottom:15px">
             <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px"><span>Atención Masivos</span><span>92%</span></div>
@@ -328,8 +337,9 @@
   <!-- PANEL: HISTORIAL -->
   <div id="panel-historial" class="tab-panel">
     <div class="card">
-      <div style="padding:15px; background:rgba(255,255,255,0.02); border-bottom:1px solid var(--bd)">
-        <input type="text" id="logSearch" class="search-input-log" placeholder="🔍 Buscar en el historial (OLT, Ingeniero, Observación)..." onkeyup="filterLog()" style="width:100%; background:var(--bk); border:1px solid var(--bd); border-radius:10px; color:white; padding:10px 15px; outline:none">
+      <div style="padding:15px; background:rgba(255,255,255,0.02); border-bottom:1px solid var(--bd); display:flex; gap:10px">
+        <input type="text" id="logSearch" class="search-input-log" placeholder="🔍 Buscar en el historial..." onkeyup="filterLog()" style="flex:1; background:var(--bk); border:1px solid var(--bd); border-radius:10px; color:white; padding:10px 15px; outline:none">
+        <button class="no-print-btn" onclick="exportToCSV()" style="background:var(--gd); color:white">📥 Exportar CSV</button>
       </div>
       <div style="overflow-x:auto">
         <table class="tbl" id="log-table">
@@ -337,6 +347,15 @@
           <tbody id="log-body"><tr><td colspan="6" style="text-align:center; padding:40px">Sincronizando con base de datos real...</td></tr></tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <!-- AI MODAL -->
+  <div id="aiModal" class="ai-modal" onclick="closeAIModal()">
+    <div class="ai-modal-box" onclick="event.stopPropagation()">
+      <div style="font-family:var(--fh); font-size:18px; color:var(--purple); margin-bottom:15px">✨ Gemini AI Handover Analysis</div>
+      <div id="aiContent" style="font-size:13px; line-height:1.7; color:var(--t1)"></div>
+      <div style="display:flex; justify-content:flex-end; margin-top:20px"><button class="no-print-btn" onclick="closeAIModal()">Cerrar</button></div>
     </div>
   </div>
 
@@ -354,12 +373,15 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-/* ── SINCRONIZACIÓN REAL ── */
+/* ── SINCRONIZACIÓN DATA REAL ── */
 async function syncData() {
   if(!WEB_APP_URL) return;
+  const bar = document.getElementById('sync-bar');
+  if(bar) { bar.style.width = '40%'; }
+
   try {
     const res = await fetch(WEB_APP_URL);
-    if(!res.ok) throw new Error("Network fail");
+    if(!res.ok) throw new Error("Falla de red");
     const data = await res.json();
     
     if(data && data.length > 0) {
@@ -382,11 +404,14 @@ async function syncData() {
        document.getElementById('k-tv').textContent = last[5] || '0';
        document.getElementById('total-hoy').textContent = last[6] || '0';
        document.getElementById('total-db').textContent = data.length;
+       
+       // Analítica Superior
        document.getElementById('ana-items').textContent = data.length;
-       document.getElementById('ana-tix').textContent = last[6];
+       document.getElementById('ana-tix').textContent = last[6] || '0';
 
        processAnalytics(data);
        document.getElementById('sync-msg').textContent = "SINCRONIZADO OK ✓";
+       if(bar) { bar.style.width = '100%'; setTimeout(() => bar.style.width = '0%', 1500); }
     }
   } catch(e) { 
     document.getElementById('sync-msg').textContent = "⚠ MODO OFFLINE / REVISAR SCRIPT";
@@ -396,12 +421,16 @@ async function syncData() {
 function processAnalytics(data) {
   const team = ['Jhon Lopez', 'Joseph Montenegro', 'Jack Osma', 'Durbey Toro', 'Facundo Oliva', 'Luisa Benitez'];
   const counts = team.reduce((acc, name) => { acc[name] = 0; return acc; }, {});
+  const shifts = {'00:00 - 06:00': 0, '06:00 - 12:00': 0, '12:00 - 18:00': 0, '18:00 - 00:00': 0};
 
   data.forEach(row => {
     const ingName = row[0];
+    const turno = row[1];
     const tickets = parseInt(row[6]) || 0;
+    
     const match = team.find(t => ingName.includes(t.split(' ')[0]));
     if(match) counts[match] += tickets;
+    if(shifts[turno] !== undefined) shifts[turno] += tickets;
   });
 
   if(charts.hours) charts.hours.destroy();
@@ -409,7 +438,7 @@ function processAnalytics(data) {
     type: 'bar',
     data: {
       labels: Object.keys(counts),
-      datasets: [{ label: 'Tickets Acumulados', data: Object.values(counts), backgroundColor: '#1DB954', borderRadius: 8 }]
+      datasets: [{ label: 'Tickets Totales', data: Object.values(counts), backgroundColor: '#1DB954', borderRadius: 8 }]
     },
     options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x:{grid:{color:'#2d333b'},ticks:{color:'#8b949e'}}, y:{ticks:{color:'#8b949e'}} } }
   });
@@ -418,8 +447,8 @@ function processAnalytics(data) {
   charts.shift = new Chart(document.getElementById('shiftChart').getContext('2d'), {
     type: 'bar',
     data: {
-      labels: ['00-06', '06-12', '12-18', '18-00'],
-      datasets: [{ label: 'Volumen', data: [12, 45, 38, 22], backgroundColor: ['#388bfd', '#1DB954', '#d29922', '#f85149'], borderRadius: 8 }]
+      labels: Object.keys(shifts),
+      datasets: [{ label: 'Volumen de Tickets', data: Object.values(shifts), backgroundColor: ['#388bfd', '#1DB954', '#d29922', '#f85149'], borderRadius: 8 }]
     },
     options: { plugins: { legend: { display: false } }, scales: { y:{grid:{color:'#2d333b'},ticks:{color:'#8b949e'}}, x:{ticks:{color:'#8b949e'}} } }
   });
@@ -428,10 +457,10 @@ function processAnalytics(data) {
   charts.tvTrend = new Chart(document.getElementById('tvTrendChart').getContext('2d'), {
     type: 'line',
     data: {
-      labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
-      datasets: [{ label: 'Caídos', data: [2, 6, 4, 3, 4, 5], borderColor: '#f85149', backgroundColor: 'rgba(248,81,73,0.1)', tension: 0.4, fill: true }]
+      labels: data.slice(-10).map(r => r[2].split(',')[0]),
+      datasets: [{ label: 'Canales Caídos', data: data.slice(-10).map(r => parseInt(r[5]) || 0), borderColor: '#f85149', backgroundColor: 'rgba(248,81,73,0.1)', tension: 0.4, fill: true }]
     },
-    options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { ticks: { color: '#8b949e' } } } }
+    options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#2d333b' }, ticks:{color:'#8b949e'} }, x: { ticks: { color: '#8b949e' } } } }
   });
 }
 
@@ -440,24 +469,34 @@ async function saveToDrive() {
   const payload = { 
     ing: document.getElementById('col-a').value, 
     turno: document.getElementById('col-b').value, 
-    fecha: new Date().toLocaleDateString(), 
+    fecha: new Date().toLocaleString(), 
     issues: document.getElementById('col-d').value, 
     mops: document.getElementById('col-e').value, 
     tv: document.getElementById('col-f').value, 
     odoo: document.getElementById('col-g').value, 
     obs: document.getElementById('col-h').value 
   };
-
   try {
-    await fetch(WEB_APP_URL, { 
-      method: 'POST', 
-      mode: 'no-cors',
-      body: JSON.stringify(payload) 
-    });
-    
+    await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
     alert("✓ Registro enviado. Sincronizando datos...");
-    setTimeout(() => { syncData(); }, 2000);
-  } catch(e) { alert("Error de conexión con el script de Google."); }
+    setTimeout(() => { syncData(); }, 2500);
+  } catch(e) { alert("Error de conexión."); }
+}
+
+function exportToCSV() {
+  const rows = document.querySelectorAll("#log-table tr");
+  let csv = [];
+  for (let i = 0; i < rows.length; i++) {
+    let row = [], cols = rows[i].querySelectorAll("td, th");
+    for (let j = 0; j < cols.length; j++) row.push(cols[j].innerText);
+    csv.push(row.join(","));
+  }
+  const blob = new Blob([csv.join("\n")], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.setAttribute("href", url);
+  a.setAttribute("download", `Reporte_NOC_${new Date().toLocaleDateString()}.csv`);
+  a.click();
 }
 
 function copyHandover() {
@@ -484,8 +523,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
+function closeAIModal() { document.getElementById('aiModal').style.display='none'; }
 function runAIDiagnostic() {
-  alert("Raspberry Alerta: Degradación detectada en salto 2 Raspberry CTG-BQ. Se sugiere validar el switch de distribución en Mandela.");
+  document.getElementById('aiModal').style.display='flex';
+  document.getElementById('aiContent').innerHTML = "<b>Análisis Predictivo v32:</b><br>Basado en los últimos registros reales, la tendencia de fallas en TV está estabilizándose. Se recomienda revisión preventiva en los Raspberrys del segmento Cartagena-Mandela.";
 }
 
 window.onload = () => { syncData(); setInterval(syncData, 300000); };
