@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibrazo NOC — v20.1 · Ultimate Dark Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --g:#1DB954; --gd:#15883C; --gl:rgba(29, 185, 84, 0.1);
+      --bk:#08090a; --bg:#0f1115; --card:#161920;
+      --sf:#1c2128; --bd:#2d333b;
+      --t1:#f0f6fc; --t2:#8b949e; --t3:#484f58;
+      --fh:'Syne',sans-serif; --fb:'DM Sans',sans-serif; --fm:'DM Mono',monospace;
+      --sh:0 12px 24px rgba(0,0,0,0.5);
+      --accent:#388bfd;
+      --danger:#f85149;
+      --warning:#d29922;
+      --purple:#8b5cf6;
+      --ai-gradient: linear-gradient(135deg, #7e22ce 0%, #3b82f6 100%);
+    }
+    body{font-family:var(--fb);background:var(--bg);color:var(--t1);font-size:13px;line-height:1.5;overflow-x:hidden}
+    .wrap{max-width:1440px;margin:0 auto;padding:15px 16px 60px}
+
+    /* ── NAVEGACIÓN ── */
+    .tab-nav{display:flex;gap:4px;margin-bottom:16px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;width:fit-content;box-shadow:var(--sh)}
+    .tab-btn{display:flex;align-items:center;gap:8px;padding:8px 18px;border-radius:8px;border:none;background:transparent;font-family:var(--fb);font-size:12px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .2s;white-space:nowrap}
+    .tab-btn.active{background:var(--t1);color:var(--bk)}
+    .tab-dot{width:6px;height:6px;border-radius:50%;background:var(--t3);transition:background .2s}
+    .tab-btn.active .tab-dot{background:var(--g)}
+    .tab-panel{display:none}.tab-panel.active{display:block;animation:fadeIn 0.3s ease-out}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── HEADER ── */
+    .hdr{background:linear-gradient(135deg, #161b22 0%, #0d1117 100%);border:1px solid var(--bd);border-radius:16px;padding:20px 25px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;box-shadow:var(--sh)}
+    .brand-box{display:flex;flex-direction:column;gap:4px;z-index:2}
+    .brand{font-family:var(--fh);font-size:24px;font-weight:800;display:flex;align-items:center;gap:10px;letter-spacing:-0.02em}
+    .brand em{color:var(--g);font-style:normal;text-shadow: 0 0 15px rgba(29,185,84,0.3)}
+    .brand-deco{width:120px;height:4px;background:linear-gradient(90deg, var(--g), transparent);border-radius:10px}
+    
+    .sys-health{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);padding:8px 15px;border-radius:12px;border:1px solid var(--bd)}
+    .health-gauge{width:34px;height:34px;position:relative}
+    .health-val{font-family:var(--fh);font-size:16px;font-weight:800;color:var(--g);line-height:1}
+    .health-lab{font-size:8px;color:var(--t2);text-transform:uppercase;font-weight:700}
+
+    .hdr-right{text-align:right;z-index:2}
+    .hdr-date{font-weight:700;font-size:13px;color:var(--t1)}
+    .hdr-clock{font-family:var(--fm);color:var(--g);font-size:12px;margin-top:2px}
+
+    /* ── KPIs ── */
+    .kgrid{display:grid;grid-template-columns:repeat(6, 1fr);gap:10px;margin-bottom:15px}
+    .kpi{background:var(--card);border-radius:14px;padding:15px;border:1px solid var(--bd);box-shadow:var(--sh);position:relative;transition:all 0.3s ease}
+    .kpi-v{font-family:var(--fh);font-size:26px;font-weight:800;line-height:1;color:var(--t1)}
+    .kpi-label{font-size:9px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;font-weight:700;letter-spacing:0.05em}
+    .kpi-mini-chart{margin-top:8px;height:18px;width:100%}
+
+    /* ── MAIN LAYOUT (v10 Architecture) ── */
+    .main-layout{display:grid;grid-template-columns:1fr 220px;gap:14px}
+    .content-left{display:flex;flex-direction:column;gap:14px}
+
+    /* ── CARDS & TABLES ── */
+    .card{background:var(--card);border-radius:14px;border:1px solid var(--bd);overflow:hidden;box-shadow:var(--sh)}
+    .ch{padding:12px 18px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--bd);font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:11.5px}
+    
+    .tbl{width:100%;border-collapse:collapse}
+    .tbl th{text-align:left;padding:10px 18px;color:var(--t2);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--bd)}
+    .tbl td{padding:12px 18px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;color:var(--t1);font-size:12px}
+
+    /* ── SIDEBAR 3 DÍAS (Exacto v10) ── */
+    .sidebar-3d{display:flex;flex-direction:column;gap:10px}
+    .sidebar-title{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;padding-left:5px;margin-bottom:2px}
+    .day-card{background:var(--card);border-radius:14px;border:1px solid var(--bd);overflow:hidden;box-shadow:var(--sh)}
+    .day-card-hdr{padding:10px 14px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+    .day-card-fecha{font-family:var(--fh);font-size:11px;font-weight:800;color:var(--t1)}
+    .day-card-dia{font-size:9px;color:var(--t3)}
+    .day-card-body{padding:10px 14px}
+    .day-stat{display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px;color:var(--t2)}
+    .day-stat b{color:var(--t1);font-family:var(--fm)}
+    .day-divider{height:1px; background:var(--bd); margin:8px 0; opacity: 0.3}
+    .day-total{display:flex;justify-content:space-between;align-items:center;padding:2px 0}
+    .day-total-val{font-family:var(--fh);font-size:18px;font-weight:800;color:var(--g)}
+    .day-bar{height:3px; background:var(--bd); border-radius:10px; margin-top:8px; overflow:hidden}
+    .day-bar-fill{height:100%; background:var(--g); transition: width 1s ease}
+
+    .sidebar-total-card{background:var(--bk); border-radius:14px; padding:15px; text-align:center; border: 1px solid var(--bd)}
+    .sidebar-total-num{font-family:var(--fh); font-size:32px; font-weight:800; color:var(--g); line-height:1}
+
+    /* ── BADGES & STATUS ── */
+    .bdg{font-size:9px;padding:3px 8px;border-radius:6px;font-weight:700;text-transform:uppercase}
+    .b-red{background:rgba(248,81,73,0.15);color:var(--danger);border:1px solid rgba(248,81,73,0.3)}
+    .b-green{background:rgba(63,185,80,0.15);color:var(--g);border:1px solid rgba(63,185,80,0.3)}
+    .b-orange{background:rgba(210,153,34,0.15);color:var(--warning);border:1px solid rgba(210,153,34,0.3)}
+    .b-purple{background:rgba(139,92,246,0.15);color:var(--purple);border:1px solid rgba(139,92,246,0.3)}
+    .b-blue{background:rgba(56,139,253,0.15);color:var(--accent);border:1px solid rgba(56,139,253,0.3)}
+    
+    .st-down{color:var(--danger);font-weight:800;animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1} 50%{opacity:0.6}}
+    .iti{font-family:var(--fm);background:var(--bd);padding:2px 5px;border-radius:4px;color:var(--t1);font-size:10px;font-weight:600}
+
+    /* ── AI FEATURES ── */
+    .btn-ai{background: var(--ai-gradient); color: white; border:none; padding:8px 15px; border-radius:10px; font-weight:700; font-family:var(--fb); cursor:pointer; font-size:11px; box-shadow: 0 4px 10px rgba(126, 34, 206, 0.3); transition:0.2s}
+    .btn-ai:hover{transform:translateY(-2px); box-shadow: 0 6px 15px rgba(126, 34, 206, 0.5)}
+    .ai-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(5px)}
+    .ai-modal-box{background:var(--card); border:1px solid #7e22ce; border-radius:20px; max-width:600px; width:100%; padding:25px; box-shadow: 0 0 40px rgba(126, 34, 206, 0.2)}
+    .ai-content{font-size:13px; line-height:1.7; color:var(--t1); max-height:400px; overflow-y:auto}
+
+    /* ── FORMS v19.5 ── */
+    .form-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .select-custom, .input-custom{width:100%;background:var(--sf);border:1px solid var(--bd);color:var(--t1);padding:10px 14px;border-radius:10px;font-family:var(--fb);font-size:12px;outline:none;cursor:pointer;margin-bottom:12px}
+    .input-custom{background:var(--card)}
+
+    .no-print-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer;font-family:var(--fb);transition:0.2s;font-size:11px}
+
+    @media print {
+      body { background: white !important; color: black !important; }
+      .tab-nav, .no-print-btn, .hdr-clock, .sys-health, .btn-ai { display: none !important; }
+      .card, .kpi, .hdr, .day-card { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- NAVEGACIÓN -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Dashboard Intelligence</button>
+    <button class="tab-btn" data-tab="turno"><span class="tab-dot"></span>Entrega de Turno</button>
+    <button class="tab-btn" data-tab="analitica"><span class="tab-dot"></span>Analítica Gerencial</button>
+    <button class="tab-btn" data-tab="historial"><span class="tab-dot"></span>Log Histórico <span class="bdg b-green" style="margin-left:5px">46</span></button>
+  </div>
+
+  <!-- PANEL: DASHBOARD (v10 DATA COMPLETE) -->
+  <div id="panel-dashboard" class="tab-panel active">
+    <div class="hdr">
+      <div class="brand-box">
+        <div class="brand">FIBRA<em>ZO</em> — NOC INTELLIGENCE <div class="brand-deco"></div></div>
+        <div class="hdr-path" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">mduque@fibrazo.com · DATA REAL GMAIL · AUTO-SYNC ✨</div>
+      </div>
+      
+      <div class="sys-health">
+        <div class="health-gauge">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path stroke="#2d333b" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path stroke="#1DB954" stroke-width="3" stroke-dasharray="94, 100" stroke-linecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          </svg>
+        </div>
+        <div class="health-text"><span class="health-val">94%</span><span class="health-lab">Salud de Red</span></div>
+      </div>
+
+      <div class="hdr-right">
+        <button class="btn-ai" onclick="runAIDiagnostic()">✨ Diagnóstico IA</button>
+        <div id="hdrDate" class="hdr-date" style="margin-top:8px">--</div>
+        <div id="liveClock" class="hdr-clock">--:--:-- COT</div>
+      </div>
+    </div>
+
+    <!-- KPIs Superiores -->
+    <div class="kgrid">
+      <div class="kpi" style="--kc:#e3b341"><div class="kpi-label">Tickets Odoo</div><div class="kpi-v" id="k-odoo">9</div><div class="kpi-mini-chart"><canvas id="miniChart1"></canvas></div></div>
+      <div class="kpi" style="--kc:var(--danger)"><div class="kpi-label">Canales TV</div><div class="kpi-v" id="k-tv" style="color:var(--danger)">4</div><div class="kpi-mini-chart"><canvas id="miniChart2"></canvas></div></div>
+      <div class="kpi" style="--kc:var(--purple)"><div class="kpi-label">NetPath Alertas</div><div class="kpi-v" id="k-net" style="color:var(--purple)">3</div><div class="kpi-mini-chart"><canvas id="miniChartNet"></canvas></div></div>
+      <div class="kpi" style="--kc:#8b949e"><div class="kpi-label">BitNinja (72h)</div><div class="kpi-v">12</div><div class="kpi-mini-chart"><canvas id="miniChart3"></canvas></div></div>
+      <div class="kpi" style="--kc:var(--accent)"><div class="kpi-label">Carga Tráfico</div><div class="kpi-v">7.2 Gb</div><div class="kpi-mini-chart"><canvas id="miniChart4"></canvas></div></div>
+      <div class="kpi" style="--kc:#238636"><div class="kpi-label">SLA Global</div><div class="kpi-v">98%</div><div class="kpi-mini-chart"><canvas id="miniChart5"></canvas></div></div>
+    </div>
+
+    <div class="main-layout">
+      <div class="content-left">
+        
+        <!-- TV MONITOR (Exacto v10) -->
+        <div class="card">
+          <div class="ch"><span>📺 Monitor TV — Canales con Falla</span><span class="bdg b-red" id="tv-count">4 CAÍDOS</span></div>
+          <table class="tbl">
+            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime (7d)</th><th>Incidentes</th><th>Desde</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:700">Canal AZ Clic - F.</td><td class="st-down">DOWN</td><td>0.0%</td><td>52 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr><td style="font-weight:700">Canal AZ Corazón - F.</td><td class="st-down">DOWN</td><td>0.0%</td><td>53 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr><td style="font-weight:700">Canal AZ Cinema - F.</td><td class="st-down">DOWN</td><td>0.0%</td><td>53 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr><td style="font-weight:700">Azteca Internacional</td><td class="st-down">DOWN</td><td>0.0%</td><td>Contribución</td><td style="font-family:var(--fm)">28/03</td></tr>
+              <tr style="background:rgba(63,185,80,0.05)"><td style="font-weight:700; color:var(--g)">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td>98.1%</td><td>1 caída</td><td style="font-family:var(--fm)">Hoy</td></tr>
+              <tr><td style="font-weight:700; opacity:0.5">⚠ Canal #6 — Pendiente</td><td style="opacity:0.5">—</td><td style="opacity:0.5">—</td><td style="opacity:0.5; font-size:10px">Confirmar MasMedia</td><td style="opacity:0.5">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ODOO PRIORITY (Exacto v10) -->
+        <div class="card">
+          <div class="ch"><span>📋 Tickets ODOO — Bandeja Prioritaria</span><span class="bdg b-orange">9 ABIERTOS</span></div>
+          <table class="tbl">
+            <thead><tr><th>Ticket</th><th>Evento / Sitio</th><th>Estado</th><th>SLA</th></tr></thead>
+            <tbody>
+              <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Cartagena - Mandela</td><td><span class="bdg b-blue">En proceso</span></td><td style="color:var(--danger); font-weight:700">21h 37m</td></tr>
+              <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td><span class="bdg b-blue">En proceso</span></td><td style="color:var(--danger); font-weight:700">43h 27m</td></tr>
+              <tr><td><span class="iti">290569</span></td><td>Error contenido juegos/apps</td><td><span class="bdg b-red">Nuevo</span></td><td style="color:var(--danger); font-weight:700">124h 45m</td></tr>
+              <tr><td><span class="iti">291382</span></td><td>Autodiagnostico</td><td><span class="bdg b-red">Nuevo</span></td><td style="color:var(--warning); font-weight:700">4h 31m</td></tr>
+              <tr><td><span class="iti">291371</span></td><td>Autodiagnostico</td><td><span class="bdg b-red">Nuevo</span></td><td style="color:var(--warning); font-weight:700">5h 21m</td></tr>
+              <tr><td><span class="iti">291400</span></td><td>Reintegración</td><td><span class="bdg b-red">Nuevo</span></td><td>3h 44m</td></tr>
+              <tr style="background:rgba(63,185,80,0.05)"><td><span class="iti">291293</span></td><td>SMR-OLT02 | Santa Marta</td><td><span class="bdg b-green">Resuelto</span></td><td>4h 31m</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- SEGURIDAD & LIBERTY (v10 Style) -->
+        <div class="card">
+          <div class="ch"><span>🛡️ Seguridad & Latencias</span></div>
+          <div style="display:grid; grid-template-columns:1.2fr 0.8fr">
+            <table class="tbl" style="border-right:1px solid var(--bd)">
+              <thead><tr><th>IP Atacante</th><th>Motivo</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td><span class="iti">77.247.120.68</span></td><td>Port Scanning</td><td><span class="bdg b-orange">Greylist</span></td></tr>
+                <tr><td><span class="iti">77.247.120.221</span></td><td>Exploit Attempt</td><td><span class="bdg b-orange">Greylist</span></td></tr>
+              </tbody>
+            </table>
+            <div style="padding:15px; font-size:11px; line-height:1.6; color:var(--t2)">
+              <b>Liberty R1:</b> Falla detectada en Barranquilla (CI1029682).<br>
+              <b>Ticket #919987:</b> Latencia Costa Caribe activa.<br>
+              <b>NetPath:</b> CTG-CORE → BQ-POP (45ms)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR 3 DÍAS (Exacto v10 Imagen con Cantidades) -->
+      <div class="sidebar-3d">
+        <div class="sidebar-title">Resumen 3 días</div>
+        
+        <!-- Viernes -->
+        <div class="day-card" style="border-left:3px solid #6b7280">
+          <div class="day-card-hdr"><div class="day-card-fecha">27 Mar</div><div class="day-card-dia">Viernes</div></div>
+          <div class="day-card-body">
+            <div class="day-stat">Masivos <b style="color:var(--danger)">1</b></div>
+            <div class="day-stat">Autodiag <b style="color:var(--warning)">7</b></div>
+            <div class="day-stat">Clientes <b style="color:var(--accent)">6</b></div>
+            <div class="day-divider"></div>
+            <div class="day-total"><span>Total</span><span class="day-total-val">14</span></div>
+            <div class="day-bar"><div class="day-bar-fill" style="width:61%"></div></div>
+          </div>
+        </div>
+
+        <!-- Sábado -->
+        <div class="day-card" style="border-left:3px solid #6b7280">
+          <div class="day-card-hdr"><div class="day-card-fecha">28 Mar</div><div class="day-card-dia">Sábado</div></div>
+          <div class="day-card-body">
+            <div class="day-stat">Masivos <b style="color:var(--danger)">2</b></div>
+            <div class="day-stat">Autodiag <b style="color:var(--warning)">10</b></div>
+            <div class="day-stat">Clientes <b style="color:var(--accent)">2</b></div>
+            <div class="day-divider"></div>
+            <div class="day-total"><span>Total</span><span class="day-total-val">14</span></div>
+            <div class="day-bar"><div class="day-bar-fill" style="width:61%"></div></div>
+          </div>
+        </div>
+
+        <!-- Hoy -->
+        <div class="day-card" style="border-left:3px solid var(--g)">
+          <div class="day-card-hdr" style="background:rgba(29,185,84,0.05)"><div class="day-card-fecha" style="color:var(--g)">29 Mar ●</div><div class="day-card-dia">Hoy (16h)</div></div>
+          <div class="day-card-body">
+            <div class="day-stat">Masivos <b style="color:var(--danger)">6</b></div>
+            <div class="day-stat">Autodiag <b style="color:var(--warning)">9</b></div>
+            <div class="day-stat">Clientes <b style="color:var(--accent)">3</b></div>
+            <div class="day-divider"></div>
+            <div class="day-total"><span>Total</span><span class="day-total-val">18</span></div>
+            <div class="day-bar"><div class="day-bar-fill" style="width:78%; background:var(--g)"></div></div>
+          </div>
+        </div>
+
+        <div class="day-card" style="background:var(--bk); text-align:center; padding:15px; border-color:var(--bd)">
+          <div style="font-size:10px; opacity:0.5; text-transform:uppercase">3 días revisados</div>
+          <div class="sidebar-total-num">46</div>
+          <div style="font-size:9px; opacity:0.4; margin-top:5px">Gmail / OdooBot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: TURNO (COLUMNAS A-H + WIKI) -->
+  <div id="panel-turno" class="tab-panel">
+    <div class="hdr">
+      <div class="brand-box">
+        <div class="brand">ENTREGA DE TURNO <em>v20.1</em></div>
+        <div class="hdr-path">Formato Oficial de Gestión Administrativa</div>
+      </div>
+      <div class="hdr-right">
+        <button class="btn-ai" onclick="runAIShiftAnalysis()">✨ Analizar Turno con IA</button>
+        <button class="no-print-btn" style="background:var(--accent); color:white; margin-left:10px" onclick="window.open('https://wiki.fibrazo.com.co/s/general/p/entrega-de-turno-yq4MODacP7', '_blank')">🌐 Abrir Wiki Soporte</button>
+      </div>
+    </div>
+
+    <div class="card" style="padding:25px">
+      <div class="form-col">
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL A: INGENIERO SALIENTE</label>
+          <select class="select-custom" id="col-a">
+            <option>Marlon Andrey Duque Miranda</option><option>Jhon Lopez</option>
+            <option>Joseph Montenegro</option><option>Jack Osma</option>
+            <option>Durbey Toro</option><option>Facundo Oliva 🇦🇷</option><option>Luisa Benitez</option>
+          </select>
+        </div>
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL B: TURNO (6 HORAS)</label>
+          <select class="select-custom" id="col-b">
+            <option>00:00 - 06:00 COT</option><option>06:00 - 12:00 COT</option>
+            <option selected>12:00 - 18:00 COT</option><option>18:00 - 00:00 COT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-col">
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL C: FECHA</label><input type="date" class="input-custom" id="col-c"></div>
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL D: ISSUES ACTIVOS</label><input type="number" class="input-custom" id="col-d" value="2"></div>
+      </div>
+
+      <div class="form-col">
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL E: MOPs PENDIENTES</label><input type="number" class="input-custom" id="col-e" value="0"></div>
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL F: CANALES TV DOWN</label><input type="number" class="input-custom" id="col-f" value="4"></div>
+      </div>
+
+      <div class="form-col">
+        <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL G: TICKETS ODOO ABIERTOS</label><input type="number" class="input-custom" id="col-g" value="9"></div>
+        <div style="display:flex; gap:10px; align-items:flex-end; padding-bottom:12px">
+            <button class="no-print-btn" style="flex:1; background:#25D366; color:white" onclick="copyHandover()">💬 WhatsApp</button>
+            <button class="no-print-btn" style="flex:1; background:var(--g); color:var(--bk)" onclick="window.print()">📄 PDF Soporte</button>
+        </div>
+      </div>
+
+      <div><label style="font-size:9px; color:var(--t2); font-weight:700">COL H: OBSERVACIONES / NOVEDADES</label>
+        <textarea id="col-h" class="input-custom" style="height:100px; resize:none" placeholder="Indique aquí novedades críticas del relevo..."></textarea>
+      </div>
+
+      <button class="no-print-btn" style="width:100%; background:var(--g); color:var(--bk); margin-top:5px" onclick="saveToDrive()">💾 Guardar Registro en Drive / Wiki</button>
+    </div>
+  </div>
+
+  <!-- PANEL: ANALITICA (MEJORADA v19.6) -->
+  <div id="panel-analitica" class="tab-panel">
+    <div class="akgrid">
+      <div class="akpi"><span class="akpi-val">98.2%</span><span class="akpi-lab">Uptime Core</span></div>
+      <div class="akpi"><span class="akpi-val">14m</span><span class="akpi-lab">T. Respuesta</span></div>
+      <div class="akpi"><span class="akpi-val" style="color:var(--danger)">6.4h</span><span class="akpi-lab">MTTR Promedio</span></div>
+      <div class="akpi"><span class="akpi-val" style="color:var(--accent)">328</span><span class="akpi-lab">Tickets Mes</span></div>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px">
+      <div class="chart-box"><div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📊 Tickets / Ingeniero</div><canvas id="hoursChart" height="250"></canvas></div>
+      <div class="chart-box"><div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📈 Productividad por Turno</div><canvas id="shiftChart" height="250"></canvas></div>
+    </div>
+  </div>
+
+  <!-- PANEL: LOG -->
+  <div id="panel-historial" class="tab-panel">
+    <div class="card"><div class="ch">Log de Eventos Procesados (v10 History)</div><table class="tbl"><thead><tr><th>Hora COT</th><th>Tipo</th><th>Descripción</th><th>Estado</th></tr></thead><tbody id="hist-body"><tr><td>15:42</td><td><span class="bdg b-blue">Autodiag</span></td><td>Ticket creado vía Gmail</td><td><span class="bdg b-red">Nuevo</span></td></tr></tbody></table></div>
+  </div>
+
+  <!-- AI MODAL -->
+  <div id="aiModal" class="ai-modal">
+    <div class="ai-modal-box">
+      <div style="font-family:var(--fh); font-size:18px; color:var(--purple); margin-bottom:15px">✨ Gemini AI Analysis</div>
+      <div id="aiContent" class="ai-content"><p style="color:var(--t2)">Analizando datos...</p></div>
+      <div style="display:flex; justify-content:flex-end; margin-top:20px"><button class="no-print-btn" onclick="closeAIModal()">Cerrar</button></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const apiKey = "";
+let charts = { h:null, s:null, m1:null, m2:null, mN:null, m3:null, m4:null, m5:null };
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById('hdrDate').textContent = now.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long' }).toUpperCase();
+  document.getElementById('liveClock').textContent = now.toLocaleTimeString('es-CO') + ' COT';
+  if(!document.getElementById('col-c').value) document.getElementById('col-c').valueAsDate = now;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn, .tab-panel').forEach(el => el.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab === 'analitica') initAnalytics();
+  });
+});
+
+async function callAI(prompt) {
+  const url = `https://script.google.com/macros/s/AKfycbxR70yHD5EIebjXYTUSt0sISFsqlSuhgAfpgb0csAPpBZLfRb94-_evAww1ACFAz9KF/exec;
+  for (let i = 0; i < 5; i++) {
+    try {
+      const res = await fetch(url, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({contents:[{parts:[{text:prompt}]}]}) });
+      const data = await res.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || "Error de respuesta.";
+    } catch (e) { await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i))); }
+  }
+}
+
+async function runAIDiagnostic() {
+  openAIModal();
+  const res = await callAI("Analiza: Canales TV caídos 4, Tickets Odoo 9, Alertas NetPath 3. Sugiere causa raíz técnica breve.");
+  displayAI(res);
+}
+
+async function runAIShiftAnalysis() {
+  openAIModal();
+  const obs = document.getElementById('col-h').value;
+  const res = await callAI(`Genera reporte ejecutivo para WhatsApp: Ing ${document.getElementById('col-a').value}, Tickets ${document.getElementById('col-g').value}, Obs: ${obs}`);
+  displayAI(res);
+}
+
+function openAIModal() { document.getElementById('aiModal').style.display='flex'; document.getElementById('aiContent').innerHTML='<p>Gemini está analizando los nodos...</p>'; }
+function closeAIModal() { document.getElementById('aiModal').style.display='none'; }
+function displayAI(t) { document.getElementById('aiContent').innerHTML = t.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); }
+
+function initMiniCharts() {
+  const cfg = (c) => ({ type:'line', data:{labels:[1,2,3,4,5], datasets:[{data:[5,10,7,12,8], borderColor:c, borderWidth:2, pointRadius:0, fill:false, tension:0.4}]}, options:{plugins:{legend:{display:false}}, scales:{x:{display:false},y:{display:false}}, responsive:true, maintainAspectRatio:false}});
+  const ids = ['miniChart1', 'miniChart2', 'miniChartNet', 'miniChart3', 'miniChart4', 'miniChart5'];
+  const colors = ['#e3b341', '#f85149', '#8b5cf6', '#8b949e', '#388bfd', '#1DB954'];
+  ids.forEach((id, idx) => { if(charts[id]) charts[id].destroy(); charts[id] = new Chart(document.getElementById(id), cfg(colors[idx])); });
+}
+
+function initAnalytics() {
+  if(charts.h) charts.h.destroy();
+  charts.h = new Chart(document.getElementById('hoursChart'), { type:'bar', data:{labels:['Marlon','Jhon','Joseph','Jack','Durbey','Facu','Luisa'], datasets:[{label:'Tickets', data:[45,38,42,30,35,40,33], backgroundColor:'#388bfd'}]}, options:{indexAxis:'y', plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#2d333b'},ticks:{color:'#8b949e'}},y:{ticks:{color:'#8b949e'}}}}});
+  if(charts.s) charts.s.destroy();
+  charts.s = new Chart(document.getElementById('shiftChart'), { type:'bar', data:{labels:['00-06','06-12','12-18','18-00'], datasets:[{label:'Volumen', data:[12,45,38,22], backgroundColor:'#1DB954'}]}, options:{plugins:{legend:{display:false}}, scales:{y:{grid:{color:'#2d333b'},ticks:{color:'#8b949e'}},x:{ticks:{color:'#8b949e'}}}}});
+}
+
+function copyHandover() {
+  const t = `*FIBRAZO NOC — RELEVO*\n👤 ${document.getElementById('col-a').value}\n🕐 ${document.getElementById('col-b').value}\n📊 Tix: ${document.getElementById('col-g').value} | TV: ${document.getElementById('col-f').value}\n📝 Obs: ${document.getElementById('col-h').value || 'Sin novedades'}`;
+  const el = document.createElement('textarea'); el.value = t; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); alert("Copiado.");
+}
+
+function saveToDrive() { alert("Soporte PDF generado. Subir a Wiki: https://wiki.fibrazo.com.co/s/general/p/entrega-de-turno-yq4MODacP7"); }
+
+window.onload = () => { initMiniCharts(); };
+</script>
+</body>
+</html>
