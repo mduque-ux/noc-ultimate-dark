@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fibrazo NOC — v26.0 · Ultimate Professional Sync</title>
+  <title>Fibrazo NOC — v27.0 · Omega Master Final</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -47,14 +47,14 @@
     .hdr-date{font-weight:700;font-size:14px;color:var(--t1)}
     .hdr-clock{font-family:var(--fm);color:var(--g);font-size:13px;margin-top:2px}
 
-    /* ── KPIs (Estilo v10) ── */
+    /* ── KPIs (Basado en v10 Image) ── */
     .kgrid{display:grid;grid-template-columns:repeat(6, 1fr);gap:12px;margin-bottom:16px}
     .kpi{background:var(--card);border-radius:14px;padding:15px;border:1px solid var(--bd);box-shadow:var(--sh);position:relative;transition:all 0.3s ease; border-top: 3px solid var(--kc, var(--bd))}
     .kpi-v{font-family:var(--fh);font-size:28px;font-weight:800;line-height:1;color:var(--t1)}
     .kpi-label{font-size:9px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;font-weight:700;letter-spacing:0.05em}
     .kpi-trend{position:absolute; top:12px; right:12px; font-size:10px; font-weight:800}
 
-    /* ── LAYOUT PRINCIPAL (v10 Fiel) ── */
+    /* ── LAYOUT (Fiel v10) ── */
     .main-layout{display:grid;grid-template-columns:1fr 280px;gap:16px}
     .content-left{display:flex;flex-direction:column;gap:16px}
 
@@ -66,7 +66,7 @@
     .tbl th{text-align:left;padding:10px 20px;color:var(--t2);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--bd)}
     .tbl td{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;color:var(--t1);font-size:12px}
 
-    /* ── RASPBERRYS ── */
+    /* ── RASPBERRYS (NetPath Visual) ── */
     .path-row{display:flex;align-items:center;gap:10px}
     .path-node{width:10px;height:10px;border-radius:50%;border:2px solid var(--bd)}
     .path-line{height:2px;flex:1;background:var(--bd)}
@@ -79,7 +79,7 @@
     .uptime-bar{height:5px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;flex:1}
     .uptime-fill{height:100%;border-radius:3px}
 
-    /* ── SIDEBAR (v10 Restore) ── */
+    /* ── SIDEBAR (Restore v10) ── */
     .sidebar-3d{display:flex;flex-direction:column;gap:12px}
     .sidebar-title{font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;margin-bottom:5px;padding-left:5px}
     .day-card{background:var(--card);border-radius:16px;border:1px solid var(--bd);overflow:hidden;box-shadow:var(--sh)}
@@ -103,12 +103,12 @@
     @keyframes blink{0%,100%{opacity:1} 50%{opacity:0.6}}
     .iti{font-family:var(--fm);background:var(--bd);padding:2px 5px;border-radius:4px;color:var(--t1);font-size:10px;font-weight:600}
 
-    /* ── FORMS (v19.5 Handover) ── */
+    /* ── FORMS (Full v19.5/A-H) ── */
     .form-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
     .select-custom, .input-custom{width:100%;background:var(--sf);border:1px solid var(--bd);color:var(--t1);padding:10px 14px;border-radius:10px;font-family:var(--fb);font-size:12px;outline:none;margin-bottom:12px}
     .no-print-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer;font-family:var(--fb);transition:0.2s;font-size:11px}
 
-    /* ── ANALYTICS (v20.1 Style) ── */
+    /* ── ANALYTICS (v20.1 Management Report) ── */
     .akgrid{display:grid;grid-template-columns:repeat(4, 1fr);gap:12px;margin-bottom:20px}
     .akpi{background:rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius:14px; padding:20px; text-align:center}
     .akpi-val{font-family:var(--fh); font-size:26px; color:var(--g); display:block; line-height:1}
@@ -118,7 +118,7 @@
     @media print {
       .tab-nav, .no-print-btn, .hdr-clock, .sys-health { display: none !important; }
       body { background: white !important; color: black !important; }
-      .card, .kpi, .hdr { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
+      .card, .kpi, .hdr, .day-card { border: 1px solid #ddd !important; background: white !important; color: black !important; break-inside: avoid; }
     }
   </style>
 </head>
@@ -127,9 +127,9 @@
 
   <!-- NAVEGACIÓN -->
   <div class="tab-nav">
-    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Panel Ops</button>
+    <button class="tab-btn active" data-tab="dashboard"><span class="tab-dot"></span>Dashboard Intelligence</button>
     <button class="tab-btn" data-tab="turno"><span class="tab-dot"></span>Entrega de Turno</button>
-    <button class="tab-btn" data-tab="analitica"><span class="tab-dot"></span>Analítica Real</button>
+    <button class="tab-btn" data-tab="analitica"><span class="tab-dot"></span>Analítica General</button>
     <button class="tab-btn" data-tab="historial"><span class="tab-dot"></span>Log Histórico Real</button>
   </div>
 
@@ -138,7 +138,7 @@
     <div class="hdr">
       <div class="brand-box">
         <div class="brand">FIBRA<em>ZO</em> — NOC INTELLIGENCE <div class="brand-deco"></div></div>
-        <div class="hdr-path" id="sync-msg" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">DATA REAL GMAIL · SYNC: 100% ✨</div>
+        <div class="hdr-path" id="sync-msg" style="font-size:9px; color:var(--t2); font-family:var(--fm); margin-top:5px">mduque@fibrazo.com · DATA REAL GMAIL · AUTO-SYNC ✨</div>
       </div>
       
       <div class="sys-health">
@@ -149,13 +149,12 @@
       </div>
 
       <div class="hdr-right">
-        <button class="no-print-btn" style="background:var(--ai-gradient); color:white" onclick="runAIDiagnostic()">✨ Diagnóstico IA</button>
-        <div id="hdrDate" style="font-weight:700; font-size:14px; margin-top:8px">--</div>
+        <div id="hdrDate" style="font-weight:700; font-size:14px">--</div>
         <div id="liveClock" style="color:var(--g); font-weight:700; font-family:var(--fm)">--:--:-- COT</div>
       </div>
     </div>
 
-    <!-- KPIs (v10 Image Style) -->
+    <!-- KPIs -->
     <div class="kgrid">
       <div class="kpi" style="--kc:#e3b341"><div class="kpi-label">Tickets Abiertos</div><div class="kpi-v" id="k-odoo">9</div><div class="kpi-trend" style="color:var(--warning)">+4 hoy</div></div>
       <div class="kpi" style="--kc:var(--danger)"><div class="kpi-label">Canales TV Caídos</div><div class="kpi-v" id="k-tv" style="color:var(--danger)">4</div><div class="kpi-trend" style="color:var(--g)">↓ de 6</div></div>
@@ -167,7 +166,7 @@
 
     <div class="main-layout">
       <div class="content-left">
-        <!-- RASPBERRYS visual -->
+        <!-- RASPBERRYS (NetPath visual) -->
         <div class="card">
           <div class="ch"><span>🛡️ Fibrazo Raspberry Monitoring — <i>Rutas de Red</i></span><span class="bdg b-purple">3 Degradaciones</span></div>
           <table class="tbl">
@@ -193,25 +192,24 @@
         <div class="card">
           <div class="ch"><span>📺 Monitor TV — Canales con Falla</span><span class="bdg b-red">FALLA ACTIVA</span></div>
           <table class="tbl">
-            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime 7d</th><th>Incidentes</th><th>Desde</th></tr></thead>
+            <thead><tr><th>Canal</th><th>Estado</th><th style="width:25%">Uptime 7d</th><th>Desde</th></tr></thead>
             <tbody>
-              <tr><td style="font-weight:700">AZ Clic - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td style="color:var(--t3)">52 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
-              <tr><td style="font-weight:700">AZ Corazón - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td style="color:var(--t3)">53 caídas</td><td style="font-family:var(--fm)">28/03</td></tr>
-              <tr style="background:rgba(63,185,80,0.05)"><td style="color:var(--g); font-weight:700">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td><div class="up-bar-wrap"><span>98.1%</span><div class="uptime-bar"><div class="uptime-fill" style="width:98%; background:var(--g)"></div></div></div></td><td style="color:var(--t3)">1 caída</td><td style="font-family:var(--fm)">Hoy</td></tr>
+              <tr><td style="font-weight:700">AZ Clic - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td>28/03</td></tr>
+              <tr><td style="font-weight:700">AZ Corazón - F.</td><td class="st-down">DOWN</td><td><div class="up-bar-wrap"><span>0.0%</span><div class="uptime-bar"><div class="uptime-fill" style="width:0%; background:var(--danger)"></div></div></div></td><td>28/03</td></tr>
+              <tr style="background:rgba(63,185,80,0.05)"><td style="color:var(--g); font-weight:700">Novelísima - F.</td><td style="color:var(--g); font-weight:800">RECUP</td><td><div class="up-bar-wrap"><span>98.1%</span><div class="uptime-bar"><div class="uptime-fill" style="width:98%; background:var(--g)"></div></div></div></td><td>Hoy</td></tr>
             </tbody>
           </table>
         </div>
 
-        <!-- ODOO + SEGURIDAD (v10 Image Grid) -->
+        <!-- ODOO + SEGURIDAD (v10 Grid) -->
         <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:16px">
           <div class="card">
             <div class="ch"><span>📋 Bandeja ODOO Prioritaria</span><span class="bdg b-orange">9 ABIERTOS</span></div>
             <table class="tbl">
               <thead><tr><th>ID</th><th>Sitio</th><th>SLA</th></tr></thead>
               <tbody>
-                <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Mandela</td><td style="color:var(--danger); font-weight:700">21h 37m</td></tr>
-                <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td style="color:var(--danger); font-weight:700">43h 27m</td></tr>
-                <tr><td><span class="iti">290569</span></td><td>Error contenido juegos/apps</td><td style="color:var(--danger); font-weight:700">124h 45m</td></tr>
+                <tr><td><span class="iti">291066</span></td><td>MDL-OLT04 | Mandela</td><td style="color:var(--danger)">21h 37m</td></tr>
+                <tr><td><span class="iti">290960</span></td><td>TUR-OLT01 | Turbaco</td><td style="color:var(--danger)">43h 27m</td></tr>
               </tbody>
             </table>
           </div>
@@ -229,7 +227,6 @@
       <!-- SIDEBAR 3 DÍAS (v10 Restore) -->
       <div class="sidebar-3d">
         <div class="sidebar-title">Resumen de Carga (72h)</div>
-        
         <div class="day-card" style="border-left:3px solid var(--g)">
           <div class="day-card-hdr"><div class="day-card-fecha" style="color:var(--g)">29 Mar ●</div><div class="day-card-dia" style="font-size:9px">HOY</div></div>
           <div class="day-card-body">
@@ -240,21 +237,9 @@
             <div class="day-bar"><div class="day-bar-fill" style="width:78%"></div></div>
           </div>
         </div>
-
-        <div class="day-card">
-          <div class="day-card-hdr"><div class="day-card-fecha">28 Mar</div><div class="day-card-dia" style="font-size:9px">SÁBADO</div></div>
-          <div class="day-card-body">
-            <div class="day-stat">Masivos <b>2</b></div>
-            <div class="day-stat">Autodiag <b>10</b></div>
-            <div class="day-divider"></div>
-            <div style="display:flex; justify-content:space-between"><span>Total</span><span class="day-total-val" style="font-size:16px">14</span></div>
-          </div>
-        </div>
-
         <div class="day-card" style="background:var(--bk); text-align:center; padding:15px; border-color:var(--bd)">
           <div style="font-size:10px; opacity:0.5; text-transform:uppercase">3 DÍAS REVISADOS</div>
           <div style="font-family:var(--fh); font-size:32px; font-weight:800; color:var(--g)" id="total-db">0</div>
-          <div style="font-size:9px; opacity:0.3">Gmail / OdooBot Sync</div>
         </div>
       </div>
     </div>
@@ -263,7 +248,7 @@
   <!-- PANEL: TURNO (Full v19.5/A-H) -->
   <div id="panel-turno" class="tab-panel">
     <div class="hdr">
-      <div class="brand-box"><div class="brand">ENTREGA DE TURNO <em>v26.0</em></div></div>
+      <div class="brand-box"><div class="brand">ENTREGA DE TURNO <em>v27.0</em></div></div>
       <div class="hdr-right no-print" style="display:flex; gap:10px">
         <button class="no-print-btn" style="background:var(--accent); color:white" onclick="window.open('https://wiki.fibrazo.com.co/s/general/p/entrega-de-turno-yq4MODacP7', '_blank')">🌐 Wiki Soporte</button>
         <button class="no-print-btn" style="background:#25D366; color:white" onclick="copyHandover()">💬 WhatsApp</button>
@@ -294,24 +279,24 @@
         <div><label style="font-size:9px; font-weight:700; color:var(--t2)">COL G: TICKETS ODOO</label><input type="number" class="input-custom" id="col-g" value="9"></div>
       </div>
       <div><label style="font-size:9px; font-weight:700; color:var(--t2)">COL H: OBSERVACIONES TÉCNICAS</label><textarea id="col-h" class="input-custom" style="height:120px; resize:none" placeholder="Indique novedades técnicas críticas..."></textarea></div>
-      <button class="no-print-btn" style="width:100%; background:var(--g); color:var(--bk); height:45px; border:none; margin-top:10px" onclick="saveToDrive()">💾 GUARDAR EN GOOGLE DRIVE & ACTUALIZAR LOG</button>
+      <button class="no-print-btn" style="width:100%; background:var(--g); color:var(--bk); height:45px; border:none; margin-top:10px" onclick="saveToDrive()">💾 GUARDAR EN GOOGLE DRIVE & ACTUALIZAR ANALÍTICA</button>
     </div>
   </div>
 
-  <!-- PANEL: ANALITICA (v20.1 Management Report) -->
+  <!-- PANEL: ANALITICA GENERAL (MOTOR REAL) -->
   <div id="panel-analitica" class="tab-panel">
     <div class="hdr">
-      <div class="brand-box"><div class="brand">REPORTE GERENCIAL <em>NOC Intelligence</em></div></div>
+      <div class="brand-box"><div class="brand">ANALÍTICA GENERAL <em>Reporte de Datos Reales</em></div></div>
     </div>
     <div class="akgrid">
       <div class="akpi"><span class="akpi-val" id="ana-items">--</span><span class="akpi-lab">REGISTROS TOTALES</span></div>
-      <div class="akpi"><span class="akpi-val">98.2%</span><span class="akpi-lab">UPTIME CORE</span></div>
+      <div class="akpi"><span class="akpi-val">98.2%</span><span class="akpi-lab">DISPONIBILIDAD CORE</span></div>
       <div class="akpi"><span class="akpi-val" style="color:var(--danger)">6.4h</span><span class="akpi-lab">MTTR PROMEDIO</span></div>
       <div class="akpi"><span class="akpi-val" id="ana-tix">--</span><span class="akpi-lab">TIX PENDIENTES</span></div>
     </div>
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px">
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📊 Tickets / Ingeniero (Performance Real)</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📊 Tickets Gestionados (Basado en historial)</div>
         <canvas id="hoursChart" height="250"></canvas>
       </div>
       <div class="chart-box">
@@ -321,11 +306,11 @@
     </div>
     <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:16px">
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📺 Tendencia Fallas TV (Histórico 24h)</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">📺 Tendencia Fallas TV (Muestra)</div>
         <canvas id="tvTrendChart" height="200"></canvas>
       </div>
       <div class="chart-box">
-        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">🎯 Cumplimiento Objetivos SLA</div>
+        <div style="font-family:var(--fh); font-size:14px; margin-bottom:15px">🎯 Cumplimiento Metas SLA</div>
         <div style="padding-top:20px">
           <div style="margin-bottom:15px">
             <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px"><span>Atención Masivos</span><span>92%</span></div>
@@ -334,10 +319,6 @@
           <div style="margin-bottom:15px">
             <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px"><span>Atención Hogares</span><span>88%</span></div>
             <div style="height:8px; background:var(--bd); border-radius:4px; overflow:hidden"><div style="width:88%; height:100%; background:var(--accent)"></div></div>
-          </div>
-          <div>
-            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px"><span>Gestión TV</span><span>100%</span></div>
-            <div style="height:8px; background:var(--bd); border-radius:4px; overflow:hidden"><div style="width:100%; height:100%; background:var(--gd)"></div></div>
           </div>
         </div>
       </div>
@@ -353,7 +334,7 @@
       <div style="overflow-x:auto">
         <table class="tbl" id="log-table">
           <thead><tr><th>Fecha</th><th>Ingeniero</th><th>Turno</th><th>Issues</th><th>Odoo</th><th>Observaciones</th></tr></thead>
-          <tbody id="log-body"><tr><td colspan="6" style="text-align:center; padding:40px">Conectando a base de datos...</td></tr></tbody>
+          <tbody id="log-body"><tr><td colspan="6" style="text-align:center; padding:40px">Sincronizando con base de datos real...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -378,7 +359,7 @@ async function syncData() {
   if(!WEB_APP_URL) return;
   try {
     const res = await fetch(WEB_APP_URL);
-    if(!res.ok) throw new Error("Falla de red");
+    if(!res.ok) throw new Error("Network fail");
     const data = await res.json();
     
     if(data && data.length > 0) {
@@ -395,7 +376,7 @@ async function syncData() {
          </tr>
        `).reverse().join('');
 
-       // KPIs
+       // KPIs dinámicos
        const last = data[data.length - 1];
        document.getElementById('k-odoo').textContent = last[6] || '0';
        document.getElementById('k-tv').textContent = last[5] || '0';
@@ -428,7 +409,7 @@ function processAnalytics(data) {
     type: 'bar',
     data: {
       labels: Object.keys(counts),
-      datasets: [{ label: 'Tickets Gestionados', data: Object.values(counts), backgroundColor: '#1DB954', borderRadius: 8 }]
+      datasets: [{ label: 'Tickets Acumulados', data: Object.values(counts), backgroundColor: '#1DB954', borderRadius: 8 }]
     },
     options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x:{grid:{color:'#2d333b'},ticks:{color:'#8b949e'}}, y:{ticks:{color:'#8b949e'}} } }
   });
@@ -438,7 +419,7 @@ function processAnalytics(data) {
     type: 'bar',
     data: {
       labels: ['00-06', '06-12', '12-18', '18-00'],
-      datasets: [{ label: 'Promedio Tickets', data: [12, 45, 38, 22], backgroundColor: ['#388bfd', '#1DB954', '#d29922', '#f85149'], borderRadius: 8 }]
+      datasets: [{ label: 'Volumen', data: [12, 45, 38, 22], backgroundColor: ['#388bfd', '#1DB954', '#d29922', '#f85149'], borderRadius: 8 }]
     },
     options: { plugins: { legend: { display: false } }, scales: { y:{grid:{color:'#2d333b'},ticks:{color:'#8b949e'}}, x:{ticks:{color:'#8b949e'}} } }
   });
@@ -448,7 +429,7 @@ function processAnalytics(data) {
     type: 'line',
     data: {
       labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
-      datasets: [{ label: 'Fallas TV', data: [2, 6, 4, 3, 4, 5], borderColor: '#f85149', backgroundColor: 'rgba(248,81,73,0.1)', tension: 0.4, fill: true }]
+      datasets: [{ label: 'Caídos', data: [2, 6, 4, 3, 4, 5], borderColor: '#f85149', backgroundColor: 'rgba(248,81,73,0.1)', tension: 0.4, fill: true }]
     },
     options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { ticks: { color: '#8b949e' } } } }
   });
@@ -483,7 +464,7 @@ function copyHandover() {
   const text = `*FIBRAZO NOC — RELEVO*\n👤 Ing: ${document.getElementById('col-a').value}\n🕐 Turno: ${document.getElementById('col-b').value}\n📊 Odoo: ${document.getElementById('col-g').value} | TV Down: ${document.getElementById('col-f').value}\n📝 Obs: ${document.getElementById('col-h').value || 'Sin novedades'}`;
   const el = document.createElement('textarea');
   el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-  alert("Resumen copiado.");
+  alert("Resumen copiado para WhatsApp.");
 }
 
 function filterLog() {
