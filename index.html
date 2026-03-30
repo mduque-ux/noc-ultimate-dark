@@ -72,7 +72,7 @@
     .node-err{background:var(--danger);border-color:var(--danger);animation:pulse-node 1.5s infinite}
     @keyframes pulse-node{0%{transform:scale(1);opacity:1} 50%{transform:scale(1.2);opacity:0.6} 100%{transform:scale(1);opacity:1}}
 
-    /* ── SIDEBAR 3 DÍAS (v10 Style) ── */
+    /* ── SIDEBAR 3 DÍAS ── */
     .sidebar-3d{display:flex;flex-direction:column;gap:12px}
     .day-card{background:var(--card);border-radius:16px;border:1px solid var(--bd);overflow:hidden;box-shadow:var(--sh)}
     .day-card-hdr{padding:12px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
@@ -163,7 +163,7 @@
 
     <div class="main-layout">
       <div class="content-left">
-        <!-- NETPATH (Fusión v17) -->
+        <!-- NETPATH visual -->
         <div class="card">
           <div class="ch"><span>🛡️ Fibrazo NetPath Monitoring — <i>Rutas de Red</i></span><span class="bdg b-purple">3 Degradaciones</span></div>
           <table class="tbl">
@@ -185,7 +185,7 @@
           </table>
         </div>
 
-        <!-- TV MONITOR (Fusión v10) -->
+        <!-- TV MONITOR -->
         <div class="card">
           <div class="ch"><span>📺 Monitor TV — Canales con Falla</span><span class="bdg b-red">4 CAÍDOS</span></div>
           <table class="tbl">
@@ -198,7 +198,7 @@
           </table>
         </div>
 
-        <!-- ODOO (Fusión v10) -->
+        <!-- ODOO -->
         <div class="card">
           <div class="ch"><span>📋 Tickets ODOO — Bandeja Prioritaria</span><span class="bdg b-orange">9 ABIERTOS</span></div>
           <table class="tbl">
@@ -212,7 +212,7 @@
         </div>
       </div>
 
-      <!-- SIDEBAR (Fusión v10) -->
+      <!-- SIDEBAR -->
       <div class="sidebar-3d">
         <div style="font-size:10px; font-weight:800; color:var(--t3); text-transform:uppercase; margin-bottom:5px">Resumen 72h</div>
         <div class="day-card" style="border-left:3px solid var(--g)">
@@ -360,7 +360,7 @@ function processAnalytics(data) {
   data.forEach(row => {
     const ing = row[0];
     const tix = parseInt(row[6]) || 0;
-    // Exclusión de Marlon y Nombres Genéricos
+    // Exclusión de Marlon
     if(!ing.includes('Marlon')) counts[ing] = (counts[ing] || 0) + tix;
   });
 
